@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: 'American Typewriter', serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: yellow;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .envelope {
+            position: relative;
+            width: 200px;
+            height: 120px;
+            background-color: #f4c2c2;
+            border-radius: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 60px solid #f4c2c2;
+        }
+
+        .envelope:after {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 200px;
+            height: 60px;
+            background-color: #f4c2c2;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .letter {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            width: 100px;
+            height: 80px;
+            background-color: white;
+            border-radius: 5px;
+            animation: slideOut 2s forwards;
+            animation-delay: 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: black;
+            text-align: center;
+        }
+
+        @keyframes slideOut {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .button {
+            position: absolute;
+            top: 200px;
+            background-color: #f4c2c2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            animation: fadeIn 2s forwards;
+            animation-delay: 3s;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .final-message {
+            display: none;
+            font-size: 24px;
+            text-align: center;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <!-- Generar estrellas dinámicamente -->
+        <script>
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                document.querySelector('.stars').appendChild(star);
+            }
+        </script>
+    </div>
+
+    <div class="envelope">
+        <div class="letter">¿Quieres ser mi San Valentín Melissa?</div>
+    </div>
+
+    <button class="button" onclick="showFinalMessage()">Si (única opción)</button>
+
+    <div class="final-message">Eres lo mejor que me ha pasado. Te quiero</div>
+
+    <audio id="song" src="https://youtu.be/i55-OIeilf8?si=CWSmpIYd6sOjnnHs" preload="auto"></audio>
+
+    <script>
+        function showFinalMessage() {
+            document.querySelector('.envelope').style.display = 'none';
+            document.querySelector('.button').style.display = 'none';
+            document.querySelector('.final-message').style.display = 'block';
+            document.getElementById('song').play();
+        }
+    </script>
+</body>
+</html>
